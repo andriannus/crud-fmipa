@@ -20,6 +20,9 @@
 
 		<!-- Custom styles for this template-->
 		<link rel="stylesheet" href="<?= base_url('asset/sb-admin/css/sb-admin.min.css') ?>">
+
+		<script src="<?= base_url('asset/vue/vue.min.js') ?>"></script>
+		<script src="<?= base_url('asset/axios/axios.min.js') ?>"></script>
 	</head>
 
 	<body id="page-top">
@@ -66,5 +69,12 @@
 
 		<!-- Custom scripts for all pages-->
 		<script src="<?= base_url('asset/sb-admin/js/sb-admin.min.js') ?>"></script>
+
+		<script>
+		// Call the dataTables jQuery plugin
+		$(document).ready(function() {
+			$('#dataTable').DataTable();
+		});
+		</script>
 	</body>
 </html>

@@ -5,6 +5,16 @@ class Plant extends CI_Controller {
 
 	public $layout = 'core/layouts/admin_app';
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model([
+			'Plant_model' => 'plant',
+			'PlantArea_model' => 'area',
+			'PlantFamily_model' => 'family'
+		]);
+	}
+
 	public function area()
 	{
 		$data = [
@@ -57,18 +67,7 @@ class Plant extends CI_Controller {
 			'title' => 'Famili Tanaman | Administrator - FMIPA',
 			'menu' => 'tanaman-famili',
 			'page' => 'plant/famili',
-			'famili' => ''
-		];
-
-		$this->load->view($this->layout, $data);
-	}
-
-	public function familiAdd()
-	{
-		$data = [
-			'title' => 'Tambah Famili Tanaman | Administrator - FMIPA',
-			'menu' => 'tanaman-famili',
-			'page' => 'plant/famili_add'
+			'famili' => $this->family->index()->result()
 		];
 
 		$this->load->view($this->layout, $data);
@@ -76,7 +75,25 @@ class Plant extends CI_Controller {
 
 	public function familiAddProcess()
 	{
-		//
+		$nama = $this->input->post('nama');
+
+		$data['nama'] = $nama;
+
+		$result = $this->family->store($data);
+		if ($result) {
+			return $this->output
+									->set_status_header('201')
+									->set_output(json_encode([
+											'success' => true
+										]));
+
+		} else {
+			return $this->output
+									->set_status_header('500')
+									->set_output(json_encode([
+											'success' => false
+										]));
+		}
 	}
 
 	public function familiEdit($id)

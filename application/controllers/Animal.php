@@ -62,18 +62,7 @@ class Animal extends CI_Controller {
 
 		$this->load->view($this->layout, $data);
 	}
-
-	public function familiAdd()
-	{
-		$data = [
-			'title' => 'Famili Binatang | Administrator - FMIPA',
-			'menu' => 'famili-famili',
-			'page' => 'animal/famili_add'
-		];
-
-		$this->load->view($this->layout, $data);
-	}
-
+	
 	public function familiAddProcess()
 	{
 		//
