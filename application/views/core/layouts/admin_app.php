@@ -21,6 +21,18 @@
 		<!-- Custom styles for this template-->
 		<link rel="stylesheet" href="<?= base_url('asset/sb-admin/css/sb-admin.min.css') ?>">
 
+		<!-- Bootstrap core JavaScript-->
+		<script src="<?= base_url('asset/jquery/jquery.min.js') ?>"></script>
+		<script src="<?= base_url('asset/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+
+		<!-- Core plugin JavaScript-->
+		<script src="<?= base_url('asset/jquery-easing/jquery.easing.min.js') ?>"></script>
+
+		<!-- Page level plugin JavaScript-->
+		<script src="<?= base_url('asset/datatables/jquery.dataTables.min.js') ?>"></script>
+		<script src="<?= base_url('asset/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+		<script src="<?= base_url('asset/tinymce/tinymce.min.js') ?>"></script>
+		
 		<script src="<?= base_url('asset/vue/vue.min.js') ?>"></script>
 		<script src="<?= base_url('asset/axios/axios.min.js') ?>"></script>
 	</head>
@@ -56,24 +68,17 @@
 			<i class="fas fa-angle-up"></i>
 		</a>
 
-		<!-- Bootstrap core JavaScript-->
-		<script src="<?= base_url('asset/jquery/jquery.min.js') ?>"></script>
-		<script src="<?= base_url('asset/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-
-		<!-- Core plugin JavaScript-->
-		<script src="<?= base_url('asset/jquery-easing/jquery.easing.min.js') ?>"></script>
-
-		<!-- Page level plugin JavaScript-->
-		<script src="<?= base_url('asset/datatables/jquery.dataTables.min.js') ?>"></script>
-		<script src="<?= base_url('asset/datatables/dataTables.bootstrap4.min.js') ?>"></script>
-
 		<!-- Custom scripts for all pages-->
 		<script src="<?= base_url('asset/sb-admin/js/sb-admin.min.js') ?>"></script>
 
 		<script>
 		// Call the dataTables jQuery plugin
 		$(document).ready(function() {
-			$('#dataTable').DataTable();
+			tinymce.init({
+				selector: "textarea",
+				theme: "modern",
+				toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | link ",
+			});
 		});
 		</script>
 	</body>

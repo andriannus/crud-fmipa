@@ -5,6 +5,16 @@ class Admin extends CI_Controller {
 
 	public $layout = 'core/layouts/admin_app';
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model([
+			'Animal_model' => 'binatang',
+			'Plant_model' => 'tanaman',
+			'News_model' => 'berita'
+		]);
+	}
+
 	public function index()
 	{
 		$data = [
@@ -43,7 +53,8 @@ class Admin extends CI_Controller {
 		$data = [
 			'title' => 'Berita | Administrator - FMIPA',
 			'menu' => 'berita',
-			'page' => 'news/index'
+			'page' => 'news/index',
+			'berita' => $this->berita->index()->result()
 		];
 
 		$this->load->view($this->layout, $data);

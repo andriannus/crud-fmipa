@@ -34,7 +34,7 @@
 			<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th width ="1%">No</th>
+						<th width ="7%">No</th>
 						<th>NamaArea</th>
 						<th width="10%">Action</th>   
 					</tr>
@@ -42,13 +42,13 @@
 				<tbody>
 					<?php
 					$no=1;
-					foreach ($area as $list) { ?>
+					foreach ($area as $a) { ?>
 					<tr>
-						<td><?= $no; ?></td>
-						<td><?= $list->nama_area; ?></td>
+						<td class="text-center"><?= $no; ?></td>
+						<td><?= $a->nama; ?></td>
 						<td>
-							<a href="<?= base_url('admin/ubaharea/').$list->id_area_tnm; ?>" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
-							<a href="javascript:void(0)" onClick="return checkMe(<?= $list->id_area_tnm ?>)"class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+							<a href="<?= base_url('admin/ubaharea/').$a->id_area; ?>" class="btn btn-sm btn-primary"><span class="fas fa-pencil-alt"></span></a>
+							<a href="javascript:void(0)" onClick="return checkMe(<?= $a->id_area; ?>)"class="btn btn-sm btn-danger"><span class="fas fa-trash"></span></a>
 						</td>
 						<?php
 						$no++;

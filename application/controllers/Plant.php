@@ -21,7 +21,7 @@ class Plant extends CI_Controller {
 			'title' => 'Area Tanaman | Administrator - FMIPA',
 			'menu' => 'tanaman-area',
 			'page' => 'plant/area',
-			'area' => ''
+			'area' => $this->area->index()->result()
 		];
 
 		$this->load->view($this->layout, $data);
@@ -110,5 +110,17 @@ class Plant extends CI_Controller {
 	public function familiEditProcess()
 	{
 		//
+	}
+
+	public function familiDelete($id)
+	{
+		$result = $this->family->destroy($id);
+
+		if (!$result) {
+			//
+
+		} else {
+			redirect('admin/tanaman/famili');
+		}
 	}
 }

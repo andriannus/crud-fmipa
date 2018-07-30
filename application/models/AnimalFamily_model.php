@@ -8,7 +8,7 @@ class AnimalFamily_model extends CI_Model {
 
 	public function index()
 	{
-		$this->db->order_by('famili','DESC');
+		$this->db->order_by($this->id, 'DESC');
 		return $this->db->get($this->table);
 	}
 

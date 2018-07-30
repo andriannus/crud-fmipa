@@ -5,13 +5,23 @@ class Animal extends CI_Controller {
 
 	public $layout = 'core/layouts/admin_app';
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model([
+			'Animal_model' => 'animal',
+			'AnimalArea_model' => 'area',
+			'AnimalFamily_model' => 'family'
+		]);
+	}
+
 	public function area()
 	{
 		$data = [
 			'title' => 'Area Binatang | Administrator - FMIPA',
 			'menu' => 'binatang-area',
 			'page' => 'animal/area',
-			'area' => ''
+			'area' => $this->area->index()->result()
 		];
 
 		$this->load->view($this->layout, $data);
@@ -57,7 +67,7 @@ class Animal extends CI_Controller {
 			'title' => 'Famili Binatang | Administrator - FMIPA',
 			'menu' => 'binatang-famili',
 			'page' => 'animal/famili',
-			'famili' => ''
+			'famili' => $this->family->index()->result()
 		];
 
 		$this->load->view($this->layout, $data);
@@ -65,7 +75,25 @@ class Animal extends CI_Controller {
 	
 	public function familiAddProcess()
 	{
-		//
+		$nama = $this->input->post('nama');
+
+		$data['nama'] = $nama;
+
+		$result = $this->family->store($data);
+		if ($result) {
+			return $this->output
+									->set_status_header('201')
+									->set_output(json_encode([
+											'success' => true
+										]));
+
+		} else {
+			return $this->output
+									->set_status_header('500')
+									->set_output(json_encode([
+											'success' => false
+										]));
+		}
 	}
 
 	public function familiEdit($id)

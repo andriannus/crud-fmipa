@@ -69,3 +69,6 @@ $route['admin/binatang/area/(:any)/ubah'] = 'animal/areaEdit/$1';
 $route['admin/binatang/famili'] = 'animal/famili';
 $route['admin/binatang/famili/tambah'] = 'animal/familiAdd';
 $route['admin/binatang/famili/(:any)/ubah'] = 'animal/familiEdit/$1';
+
+$route['admin/berita/tambah'] = 'news/newsAdd';
+$route['admin/berita/(:any)/ubah'] = 'news/updateNews/$1';

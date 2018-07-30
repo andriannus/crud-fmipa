@@ -35,7 +35,7 @@
 				<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th width ="1%">No</th>
+							<th width ="7%">No</th>
 							<th>Nama Famili</th>
 							<th width="10%">Action</th>   
 						</tr>
@@ -45,11 +45,13 @@
 						$no=1;
 						foreach ($famili as $f) { ?>
 						<tr>
-							<td><?= $no; ?></td>
+							<td class="text-center"><?= $no; ?></td>
 							<td><?= $f->nama; ?></td>
 							<td>
 								<a href="<?= base_url('admin/ubaharea/').$f->id_famili; ?>" class="btn btn-sm btn-primary"><span class="fas fa-pencil-alt"></span></a>
-								<a href="javascript:void(0)" onClick="return checkMe(<?= $f->id_famili ?>)"class="btn btn-sm btn-danger"><span class="fas fa-trash"></span></a>
+								<button @click="checkMe(<?= $f->id_famili ?>)" class="btn btn-sm btn-danger">
+									<span class="fas fa-trash"></span>
+								</button>
 							</td>
 							<?php
 							$no++;
@@ -95,6 +97,17 @@ const plantFamily = new Vue({
 		nama: ''
 	}),
 
+	mounted () {
+		$('#dataTable').DataTable({
+			'columnDefs': [
+				{
+					'targets': 2,
+					'orderable': false
+				}
+			]
+		})
+	},
+
 	methods: {
 		store () {
 			let nama = 'nama=' + this.nama
@@ -123,6 +136,19 @@ const plantFamily = new Vue({
 		reset () {
 			this.nama = ''
 			$('#addFamily').modal('hide')
+		},
+
+		checkMe (id) {
+			if (confirm("Apakah anda yakin ingin menghapus ?")) {
+				alert("Data Berhasil Dihapus");
+
+				window.location.replace('<?= base_url("plant/familiDelete/"); ?>' + id)
+				return true;
+
+			} else {
+				alert("Data Batal Dihapus");
+				return false;
+			}
 		}
 	}
 })

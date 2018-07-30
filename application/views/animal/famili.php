@@ -35,7 +35,7 @@
 				<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th width ="1%">No</th>
+							<th width ="7%">No</th>
 							<th>Nama Famili</th>
 							<th width="10%">Action</th>   
 						</tr>
@@ -43,15 +43,13 @@
 					<tbody>
 						<?php
 						$no=1;
-						foreach ($famili as $list) { ?>
+						foreach ($famili as $f) { ?>
 						<tr>
-							<td><?= $no; ?></td>
-							<td><?= $list->famili; ?></td>
-
-
+							<td class="text-center"><?= $no; ?></td>
+							<td><?= $f->nama; ?></td>
 							<td>
-								<a href="<?= base_url('admin/ubahfamili/').$list->id; ?>" class="btn btn-sm btn-primary"><span class="fa fa-pencil"></span></a>
-								<a href="javascript:void(0)" onClick="return checkMe(<?= $list->id; ?>)"class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+								<a href="<?= base_url('admin/ubahfamili/').$f->id_famili; ?>" class="btn btn-sm btn-primary"><span class="fas fa-pencil-alt"></span></a>
+								<a href="javascript:void(0)" onClick="return checkMe(<?= $f->id_famili; ?>)"class="btn btn-sm btn-danger"><span class="fas fa-trash"></span></a>
 							</td>
 							<?php
 							$no++;
@@ -82,7 +80,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" @click="reset">Batal</button>
-					<button class="btn btn-primary" type="button" :disabled="!nama">Simpan</button>
+					<button class="btn btn-primary" type="button" @click="store" :disabled="!nama">Simpan</button>
 				</div>
 			</div>
 		</div>
@@ -98,6 +96,23 @@ const animalFamily = new Vue({
 	}),
 
 	methods: {
+		store () {
+			let nama = 'nama=' + this.nama
+
+			axios.post('<?= base_url() ?>' + 'animal/familiAddProcess', nama)
+				.then(res => {
+					if (res.data.success) {
+						window.location.reload()
+
+					} else {
+						alert('Terjadi error. Silahkan refresh halaman')
+					}
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		},
+
 		showModal () {
 			$('#addFamily').modal({
 				keyboard: false,
